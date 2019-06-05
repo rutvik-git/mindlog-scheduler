@@ -1,1 +1,1 @@
-web: python mindlog_scheduler.py
+web: python server.py
