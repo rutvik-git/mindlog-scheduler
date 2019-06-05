@@ -40,4 +40,5 @@ def startup():
     p2.start()
     return "Server Started"
 
-app.run()
+if __name__ == '__main__':
+    app.run()
