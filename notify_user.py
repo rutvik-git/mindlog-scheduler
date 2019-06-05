@@ -51,4 +51,3 @@ def msg(user):
         f.close()
         info(user+'-notified@'+str(dt.datetime.now()))
         
-msg('killer')
