@@ -40,12 +40,7 @@ def all_users_notification_scheduler():
 app = Flask(__name__)
 @app.route("/")
 def startup():
-    p1 = Process(target=user_data_scheduler)
-    p1.start()
-    p2 = Process(target=mood_data_scheduler)
-    p2.start()
-    p3 = Process(target=all_users_notification_scheduler)
-    p3.start()
+    os.system("python app_test.py")
 
     return("Server Up and Running")
 
