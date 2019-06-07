@@ -15,7 +15,7 @@ log.addHandler(h)
 
 def user_data_scheduler():
     sched = BlockingScheduler()
-    sched.add_job(user_data_update, 'interval', seconds=12)
+    sched.add_job(user_data_update, 'interval', hours=1)
     try:
         sched.start()
     except (KeyboardInterrupt, SystemExit):
@@ -23,11 +23,17 @@ def user_data_scheduler():
 
 def mood_data_scheduler():
     sched = BlockingScheduler()
-    sched.add_job(mood_data_update, 'interval', seconds=12)
+    sched.add_job(mood_data_update, 'interval', hours=1)
     try:
         sched.start()
-        if(datetime.now() - start_time >=10):
-            sched.shutdown(wait=False)
+    except (KeyboardInterrupt, SystemExit):
+        sched.shutdown(wait=False)
+
+def all_users_notification_scheduler():
+    sched = BlockingScheduler()
+    sched.add_job(schedule_new_users, 'interval', hours=2)
+    try:
+        sched.start()
     except (KeyboardInterrupt, SystemExit):
         sched.shutdown(wait=False)
 
@@ -38,7 +44,10 @@ def startup():
     p1.start()
     p2 = Process(target=mood_data_scheduler)
     p2.start()
-    return "Server Started"
+    p3 = Process(target=all_users_notification_scheduler)
+    p3.start()
+
+    return("Server Up and Running")
 
 if __name__ == '__main__':
     app.run()
