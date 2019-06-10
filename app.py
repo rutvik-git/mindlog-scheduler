@@ -40,6 +40,9 @@ def all_users_notification_scheduler():
 app = Flask(__name__)
 @app.route("/")
 def startup():
+    user_data_update()
+    mood_data_update()
+    schedule_new_users()
     p1 = Process(target=user_data_scheduler)
     p1.start()
     p2 = Process(target=mood_data_scheduler)

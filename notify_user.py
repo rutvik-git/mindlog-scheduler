@@ -37,7 +37,7 @@ def info(user, type, time):
     local_cur.execute("insert into server_logs values(DEFAULT, '%s', '%s', '%s')" % (user, type, time))
     local.commit()
 
-def send_message(contact, carrier, message):
+def send_message(user, contact, carrier, message):
     port = 465
     password = "neatlabs-mindlog"
     smtp_server = "smtp.gmail.com"
@@ -46,11 +46,11 @@ def send_message(contact, carrier, message):
     server = smtplib.SMTP_SSL(smtp_server, port)
     server.login(sender_email, password)
     to_number = (str(contact)+'{}').format(carriers[str(carrier)])
-    try:
-        server.sendmail(sender_email, to_number, message)
-        info(user,'user notification',dt.datetime.now())
-    except:
-        pass
+    # try:
+    info(user,'user notification',dt.datetime.now())
+    server.sendmail(sender_email, to_number, message)
+    # except:
+    #     pass
     server.quit()
 
 def msg(user):
@@ -65,7 +65,7 @@ def msg(user):
         local_cur.execute("select carrier from userdata where username='%s'"%(user))
         carrier = np.squeeze(local_cur.fetchall())
         message = 'Please fill your mindlog\n' + 'https://pythonserver-neatlabs.herokuapp.com/mindlog' + ' (notification for timestamp : ' + str(dt.datetime.now()) + ')'
-        send_message(str(contact), carrier, message)
+        send_message(user, str(contact), carrier, message)
 
 def schedule_user(user):
     LOCAL_DATABASE = "postgres://vlbetxrecjmcay:801d255c4b4ae13e105d06c4220a972254e65d935edbfba6f31493f133b91764@ec2-50-19-114-27.compute-1.amazonaws.com:5432/dfqi93sufn0631"
@@ -104,3 +104,5 @@ def schedule_new_users():
             t = threading.Thread(target=schedule_user, args=(user,))
             info(user, 'user scheduled', dt.datetime.now())
             t.start()
+
+msg('sdpatil')
