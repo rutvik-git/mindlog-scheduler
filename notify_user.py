@@ -46,11 +46,11 @@ def send_message(user, contact, carrier, message):
     server = smtplib.SMTP_SSL(smtp_server, port)
     server.login(sender_email, password)
     to_number = (str(contact)+'{}').format(carriers[str(carrier)])
-    # try:
-    info(user,'user notification',dt.datetime.now())
-    server.sendmail(sender_email, to_number, message)
-    # except:
-    #     pass
+    try:
+        server.sendmail(sender_email, to_number, message)
+        info(user,'user notification',dt.datetime.now())
+    except:
+        pass
     server.quit()
 
 def msg(user):
@@ -104,5 +104,3 @@ def schedule_new_users():
             t = threading.Thread(target=schedule_user, args=(user,))
             info(user, 'user scheduled', dt.datetime.now())
             t.start()
-
-msg('sdpatil')
