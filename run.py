@@ -5,13 +5,13 @@ from apscheduler.schedulers.blocking import BlockingScheduler
 from multiprocessing import Process, Queue
 import os
 from flask import Flask
-import logging
-log = logging.getLogger('apscheduler.executors.default')
-log.setLevel(logging.INFO)
-fmt = logging.Formatter('%(levelname)s:%(name)s:%(message)s')
-h = logging.StreamHandler()
-h.setFormatter(fmt)
-log.addHandler(h)
+# import logging
+# log = logging.getLogger('apscheduler.executors.default')
+# log.setLevel(logging.INFO)
+# fmt = logging.Formatter('%(levelname)s:%(name)s:%(message)s')
+# h = logging.StreamHandler()
+# h.setFormatter(fmt)
+# log.addHandler(h)
 
 def user_data_scheduler():
     sched = BlockingScheduler()
