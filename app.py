@@ -52,7 +52,7 @@ def startup():
     # p3.start()
     # return("Server Up and Running")
     # exec(Path("run.py").read_text())
-    os.execute("python run.py")
+    os.system("python run.py")
 
 if __name__ == '__main__':
     app.run()
