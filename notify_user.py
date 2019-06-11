@@ -83,10 +83,13 @@ def schedule_user(user):
         scheduler = BlockingScheduler()
         d = dt.timedelta(days = 14)
         last_date = join_date + d
+        user_schedules = []
         for time in notif_times:
             h = int(time/60)
             m = int(time%60)
+            user_schedules.append("%s:%s"%(h,m))
             scheduler.add_job(msg, 'cron', hour=h, minute=m, start_date=join_date, end_date=last_date, args=[user])
+        info(user, 'user scheduled at ' + str(user_schedules), dt.datetime.now())
         local_cur.execute("UPDATE userdata SET scheduled = NOT scheduled WHERE username = '%s'"%(user))
         local.commit()
         scheduler.start()
@@ -102,5 +105,4 @@ def schedule_new_users():
         isScheduled = bool(item[1])
         if(isScheduled is False):
             t = threading.Thread(target=schedule_user, args=(user,))
-            info(user, 'user scheduled', dt.datetime.now())
             t.start()
