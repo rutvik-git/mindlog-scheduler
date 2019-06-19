@@ -82,7 +82,7 @@ def startup():
 print("Worker Process Running...")
 user_data_update()
 mood_data_update()
-startup()
+# startup()
 schedule_new_users()
 print("Startup Processes Complete...")
 p1 = Process(target=user_data_scheduler)
