@@ -74,7 +74,7 @@ def startup():
         curr_date = dt.datetime.now().date()
         diff = (curr_date - join_date).days
         if(diff<14):
-            local_cur.execute("update userdata set scheduled = not scheduled where username='%s'"%(user))
+            local_cur.execute("update userdata set scheduled = FALSE where username='%s'"%(user))
         else:
             local_cur.execute("update userdata set valid_user = FALSE where username='%s'"%(user))
         local.commit()
@@ -82,7 +82,7 @@ def startup():
 print("Worker Process Running...")
 user_data_update()
 mood_data_update()
-# startup()
+startup()
 schedule_new_users()
 print("Startup Processes Complete...")
 p1 = Process(target=user_data_scheduler)

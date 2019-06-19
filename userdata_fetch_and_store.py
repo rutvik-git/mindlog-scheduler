@@ -27,8 +27,6 @@ def user_data_update():
     cur.execute(select_all_query % table_name)
     rows = cur.fetchall()
     local_cur = local.cursor()
-    local_cur.execute('delete from userdata')
-    local.commit()
     for row in rows:
         values = "'%s', '%s:00', '%s:00', '%s', '%s', '%s'" % (row[1],row[2],row[3],row[4],row[5],row[6])
         try:
