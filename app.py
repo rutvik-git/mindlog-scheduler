@@ -1,58 +1,34 @@
-from userdata_fetch_and_store import *
-from mooddata_fetch_and_store import *
-from notify_user import *
+from run import *
 from apscheduler.schedulers.blocking import BlockingScheduler
 from multiprocessing import Process, Queue
 import os
 from flask import Flask
 from pathlib import Path
-# import logging
-# log = logging.getLogger('apscheduler.executors.default')
-# log.setLevel(logging.INFO)
-# fmt = logging.Formatter('%(levelname)s:%(name)s:%(message)s')
-# h = logging.StreamHandler()
-# h.setFormatter(fmt)
-# log.addHandler(h)
 
-# def user_data_scheduler():
-#     sched = BlockingScheduler()
-#     sched.add_job(user_data_update, 'interval', hours=1)
-#     try:
-#         sched.start()
-#     except (KeyboardInterrupt, SystemExit):
-#         sched.shutdown(wait=False)
-#
-# def mood_data_scheduler():
-#     sched = BlockingScheduler()
-#     sched.add_job(mood_data_update, 'interval', hours=1)
-#     try:
-#         sched.start()
-#     except (KeyboardInterrupt, SystemExit):
-#         sched.shutdown(wait=False)
-#
-# def all_users_notification_scheduler():
-#     sched = BlockingScheduler()
-#     sched.add_job(schedule_new_users, 'interval', hours=1)
-#     try:
-#         sched.start()
-#     except (KeyboardInterrupt, SystemExit):
-#         sched.shutdown(wait=False)
-
+flag = False
 app = Flask(__name__)
 @app.route("/")
 def startup():
-    # user_data_update()
-    # mood_data_update()
-    # schedule_new_users()
-    # p1 = Process(target=user_data_scheduler)
-    # p1.start()
-    # p2 = Process(target=mood_data_scheduler)
-    # p2.start()
-    # p3 = Process(target=all_users_notification_scheduler)
-    # p3.start()
+    if(flag is True):
+        print("Worker Process Running...")
+        user_data_update()
+        mood_data_update()
+        startup()
+        schedule_new_users()
+        print("Startup Processes Complete...")
+        p1 = Process(target=user_data_scheduler)
+        p1.start()
+        p2 = Process(target=mood_data_scheduler)
+        p2.start()
+        p3 = Process(target=all_users_notification_scheduler)
+        p3.start()
+        p4 = Process(target=check_eligibility_scheduler)
+        p4.start()
+        print("Primary Processes Schedule Complete...")
+    flag = True
     return("Server Up and Running")
     # exec(Path("run.py").read_text())
 
 if __name__ == '__main__':
-    os.system("python run.py")
+    # os.system("python run.py")
     app.run()
