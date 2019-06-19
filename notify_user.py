@@ -79,7 +79,7 @@ def schedule_user(user):
         wakeup_time, sleep_time, join_date = local_cur.fetchone()
         start = (wakeup_time.hour)*60 + wakeup_time.minute
         end = (sleep_time.hour)*60 + sleep_time.minute
-        notif_times = np.linspace(start, end, 5, dtype=np.int16)
+        notif_times = np.linspace(start, end, 4, dtype=np.int16)
         scheduler = BlockingScheduler()
         d = dt.timedelta(days = 14)
         last_date = join_date + d
