@@ -29,6 +29,9 @@ def mood_data_update():
     rows = cur.fetchall()
 
     local_cur = local.cursor()
+    local_cur.execute('delete from mindlog')
+    local.commit()
+
     for row in rows:
         values = "'%s','%s', '%s', '%s', '%s'" % (row[0],row[1],row[2],row[3],row[4])
         try:
