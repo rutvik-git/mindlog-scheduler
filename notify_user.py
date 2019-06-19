@@ -89,7 +89,7 @@ def schedule_user(user):
             m = int(time%60)
             user_schedules.append("%s:%s"%(h,m))
             scheduler.add_job(msg, 'cron', hour=h, minute=m, start_date=join_date, end_date=last_date, args=[user])
-        info(user, 'user scheduled at ' + str(user_schedules), dt.datetime.now())
+        info(user, 'user scheduled', dt.datetime.now())
         print(user,'scheduled at', user_schedules)
         local_cur.execute("UPDATE userdata SET scheduled = TRUE WHERE username = '%s'"%(user))
         local.commit()
