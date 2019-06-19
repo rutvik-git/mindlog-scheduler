@@ -50,9 +50,9 @@ def startup():
     # p2.start()
     # p3 = Process(target=all_users_notification_scheduler)
     # p3.start()
-    # return("Server Up and Running")
+    return("Server Up and Running")
     # exec(Path("run.py").read_text())
-    os.system("python run.py")
 
 if __name__ == '__main__':
+    os.system("python run.py")
     app.run()
