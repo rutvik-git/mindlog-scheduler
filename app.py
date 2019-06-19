@@ -5,11 +5,12 @@ import os
 from flask import Flask
 from pathlib import Path
 
-flag = False
+global flag
+
 app = Flask(__name__)
 @app.route("/")
 def startup():
-    if(flag is True):
+    if(flag is False):
         print("Worker Process Running...")
         user_data_update()
         mood_data_update()
@@ -31,4 +32,5 @@ def startup():
 
 if __name__ == '__main__':
     # os.system("python run.py")
+    flag = False
     app.run()
