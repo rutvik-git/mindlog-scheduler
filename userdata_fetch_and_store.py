@@ -28,8 +28,9 @@ def user_data_update():
     rows = cur.fetchall()
     local_cur = local.cursor()
     for row in rows:
-        values = "'%s', '%s:00', '%s:00', '%s', '%s', '%s'" % (row[1],row[2],row[3],row[4],row[5],row[6])
+        values = "'%s', '%s:00', '%s:00', '%s', '%s', '%s', DEFAULT, DEFAULT" % (row[1],row[2],row[3],row[4],row[5],row[6])
         try:
+            print(insert_query % (table_name, values))
             local_cur.execute(insert_query % (table_name, values))
             local.commit()
         except:
