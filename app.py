@@ -3,8 +3,9 @@ from multiprocessing import Process, Queue
 import os
 from flask import Flask
 from pathlib import Path
-
-global flag
+from userdata_fetch_and_store import *
+from mooddata_fetch_and_store import *
+from notify_user import *
 
 app = Flask(__name__)
 @app.route("/")

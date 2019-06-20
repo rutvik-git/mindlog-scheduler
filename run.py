@@ -80,6 +80,8 @@ def startup():
         local.commit()
 
 print("Worker Process Running...")
+user_data_update()
+mood_data_update()
 startup()
 print("Startup Processes Complete...")
 p1 = Process(target=user_data_scheduler)
