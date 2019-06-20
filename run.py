@@ -15,7 +15,7 @@ from flask import Flask
 
 def user_data_scheduler():
     sched = BlockingScheduler()
-    sched.add_job(user_data_update, 'interval', minutes=1)
+    sched.add_job(user_data_update, 'interval', hours=1)
     try:
         sched.start()
     except (KeyboardInterrupt, SystemExit):
@@ -23,7 +23,7 @@ def user_data_scheduler():
 
 def mood_data_scheduler():
     sched = BlockingScheduler()
-    sched.add_job(mood_data_update, 'interval', minutes=1)
+    sched.add_job(mood_data_update, 'interval', hours=2)
     try:
         sched.start()
     except (KeyboardInterrupt, SystemExit):
@@ -31,7 +31,7 @@ def mood_data_scheduler():
 
 def all_users_notification_scheduler():
     sched = BlockingScheduler()
-    sched.add_job(schedule_new_users, 'interval', minutes=1)
+    sched.add_job(schedule_new_users, 'interval', minutes=30)
     try:
         sched.start()
     except (KeyboardInterrupt, SystemExit):
@@ -55,7 +55,7 @@ def check_eligibility():
 
 def check_eligibility_scheduler():
     sched = BlockingScheduler()
-    sched.add_job(check_eligibility, 'interval', minutes=1)
+    sched.add_job(check_eligibility, 'interval', hours=2)
     try:
         sched.start()
     except (KeyboardInterrupt, SystemExit):
