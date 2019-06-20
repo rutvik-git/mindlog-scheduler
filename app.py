@@ -9,6 +9,8 @@ global flag
 app = Flask(__name__)
 @app.route("/")
 def startup():
+    user_data_update()
+    mood_data_update()
     os.system("python run.py")
     return("Server Up and Running")
 
