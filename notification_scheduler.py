@@ -1,8 +1,8 @@
 from mindlog_functions import *
 def startup():
     print('Startup Start...')
-    user_data_update()
-    mood_data_update()
+    # user_data_update()
+    # mood_data_update()
     LOCAL_DATABASE = "postgres://vlbetxrecjmcay:801d255c4b4ae13e105d06c4220a972254e65d935edbfba6f31493f133b91764@ec2-50-19-114-27.compute-1.amazonaws.com:5432/dfqi93sufn0631"
     local = pg.connect(LOCAL_DATABASE, sslmode='require')
     local_cur = local.cursor()
