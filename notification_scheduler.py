@@ -20,6 +20,6 @@ def startup():
             local_cur.execute("update userdata set valid_user = FALSE where username='%s'"%(user))
         local.commit()
     print('Startup Process Complete...')
-startup()
+# startup()
 print('User Notification Scheduled...')
 all_users_notification_scheduler()
