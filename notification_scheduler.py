@@ -8,6 +8,9 @@ def startup():
     local_cur = local.cursor()
     local_cur.execute('select username from userdata');
     users = np.squeeze(local_cur.fetchall())
+    if (type(users) is not list):
+        temp = users
+        users = [temp]
     for user in users:
         local_cur.execute("select * from userdata where username='%s'"%(user))
         result = local_cur.fetchone()
@@ -20,6 +23,6 @@ def startup():
             local_cur.execute("update userdata set valid_user = FALSE where username='%s'"%(user))
         local.commit()
     print('Startup Process Complete...')
-# startup()
+startup()
 print('User Notification Scheduled...')
 all_users_notification_scheduler()
