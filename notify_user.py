@@ -44,6 +44,8 @@ def send_message(user, contact, carrier, message):
     sender_email = "mindlog.neatlabs@gmail.com"
     context =  ssl.create_default_context()
     server = smtplib.SMTP_SSL(smtp_server, port)
+    server.ehlo()
+    server.starttls()
     server.login(sender_email, password)
     to_number = (str(contact)+'{}').format(carriers[str(carrier)])
     try:
