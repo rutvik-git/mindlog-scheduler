@@ -59,6 +59,9 @@ def msg(user):
     local_cur = local.cursor()
     local_cur.execute('select username from userdata');
     users = np.squeeze(local_cur.fetchall())
+    if (type(users) is not list):
+        temp = users
+        users = [temp]
     if user in users:
         local_cur.execute("select contact from userdata where username='%s'"%(user))
         contact = np.squeeze(local_cur.fetchone())

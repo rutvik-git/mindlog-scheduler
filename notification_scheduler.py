@@ -21,8 +21,15 @@ def startup():
             local_cur.execute("update userdata set scheduled = FALSE where username='%s'"%(user))
         else:
             local_cur.execute("update userdata set valid_user = FALSE where username='%s'"%(user))
-        local.commit()
+    local.commit()
     print('Startup Process Complete...')
 startup()
 print('User Notification Scheduled...')
-all_users_notification_scheduler()
+
+schedule_new_users()
+# sched = BlockingScheduler()
+# sched.add_job(schedule_new_users, 'interval', minutes=5)
+# try:
+#     sched.start()
+# except (KeyboardInterrupt, SystemExit):
+#     sched.shutdown(wait=False)
