@@ -40,8 +40,10 @@ def info(user, type, time):
 def send_message(user, contact, carrier, message):
     port = 465
     password = "neatlabs-mindlog"
-    smtp_server = "smtp.gmail.com"
-    sender_email = "mindlog.neatlabs@gmail.com"
+#    smtp_server = "smtp.gmail.com"
+    smtp_server = "smtp.yandex.com"
+#    sender_email = "mindlog.neatlabs@gmail.com"
+    sender_email = "neatlabs@yandex.com"
     context =  ssl.create_default_context()
     server = smtplib.SMTP_SSL(smtp_server, port)
     server.ehlo()
