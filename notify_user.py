@@ -39,10 +39,10 @@ def info(user, type, time):
 
 def send_message(user, contact, carrier, message):
     port = 465
-    # password = "neatlabs-mindlog"
-    password = 'gtadoaxnfcgxnqpc'
+    password = "neatlabs-mindlog"
+    # password = 'gtadoaxnfcgxnqpc'
 #    smtp_server = "smtp.gmail.com"
-    smtp_server = "smtp.yandex.com"
+    smtp_server = "smtp.yandex.com.tr"
 #    sender_email = "mindlog.neatlabs@gmail.com"
     sender_email = "neatlabs@yandex.com"
     context =  ssl.create_default_context()
