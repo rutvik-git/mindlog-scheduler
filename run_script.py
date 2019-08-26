@@ -70,7 +70,7 @@ def msg(user):
         local_cur.execute("select carrier from userdata where username='%s'"%(user))
         carrier = np.squeeze(local_cur.fetchall())
         # message = 'Please fill your mindlog\n' + 'https://pythonserver-neatlabs.herokuapp.com/mindlog/' + str(user) + ' (notification for timestamp : ' + str(dt.datetime.now()) + ')'
-        message = 'Please complete your BrainE Mindlog Session!'
+        message = 'Please complete your BrainE > Mind Log session. Thank you!'
         send_message(user, str(contact), carrier, message)
 
 def schedule_user(user):
