@@ -38,12 +38,12 @@ def info(user, type, time):
 
 def send_message(user, contact, carrier, message):
     port = 465
-    password = "neatlabs-mindlog"
-    smtp_server = "smtp.gmail.com"
-    sender_email = "mindlog.neatlabs@gmail.com"
-    # password = 'gtadoaxnfcgxnqpc'
-    # smtp_server = "smtp.yandex.com"
-    # sender_email = "neatlabs@yandex.com"
+    # password = "neatlabs-mindlog"
+    # smtp_server = "smtp.gmail.com"
+    # sender_email = "mindlog.neatlabs@gmail.com"
+    password = "TeamBrainE20!("
+    smtp_server = "smtp.ucsd.edu"
+    sender_email = "neatlabs@ucsd.edu"
     context =  ssl.create_default_context()
     server = smtplib.SMTP_SSL(smtp_server, port)
     server.login(sender_email, password)
