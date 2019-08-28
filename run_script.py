@@ -62,16 +62,17 @@ def msg(user):
     local_cur = local.cursor()
     local_cur.execute('select username from userdata');
     users = np.squeeze(local_cur.fetchall())
-    if (type(users) is not list):
+    if (users.shape is ()):
         temp = users
         users = [temp]
-    if user in users:
+    if user in users.any():
         local_cur.execute("select contact from userdata where username='%s'"%(user))
         contact = np.squeeze(local_cur.fetchone())
         local_cur.execute("select carrier from userdata where username='%s'"%(user))
         carrier = np.squeeze(local_cur.fetchall())
         # message = 'Please fill your mindlog\n' + 'https://pythonserver-neatlabs.herokuapp.com/mindlog/' + str(user) + ' (notification for timestamp : ' + str(dt.datetime.now()) + ')'
-        message = 'Please complete your BrainE > Mind Log session. Thank you!'
+        # message = 'Please complete your BrainE > Mind Log session. Thank you!'
+        message = 'test message'
         send_message(user, str(contact), carrier, message)
 
 def schedule_user(user):
