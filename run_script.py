@@ -50,10 +50,11 @@ def send_message(user, contact, carrier, message):
         server.login(sender_email, password)
         to_number = (str(contact)+'{}').format(carriers[str(carrier)])
         server.sendmail(sender_email, to_number, message)
+        server.quit()
         info(user,'user notification',dt.datetime.now())
     except:
-        pass
-    server.quit()
+        info(user,'user notification failed',dt.datetime.now())
+
 
 def msg(user):
     LOCAL_DATABASE = "postgres://vlbetxrecjmcay:801d255c4b4ae13e105d06c4220a972254e65d935edbfba6f31493f133b91764@ec2-50-19-114-27.compute-1.amazonaws.com:5432/dfqi93sufn0631"
