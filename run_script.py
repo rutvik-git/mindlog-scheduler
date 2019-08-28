@@ -44,11 +44,11 @@ def send_message(user, contact, carrier, message):
     password = "TeamBrainE20!("
     smtp_server = "smtp.ucsd.edu"
     sender_email = "neatlabs@ucsd.edu"
-    context =  ssl.create_default_context()
-    server = smtplib.SMTP_SSL(smtp_server, port)
-    server.login(sender_email, password)
-    to_number = (str(contact)+'{}').format(carriers[str(carrier)])
     try:
+        context =  ssl.create_default_context()
+        server = smtplib.SMTP_SSL(smtp_server, port)
+        server.login(sender_email, password)
+        to_number = (str(contact)+'{}').format(carriers[str(carrier)])
         server.sendmail(sender_email, to_number, message)
         info(user,'user notification',dt.datetime.now())
     except:
