@@ -123,8 +123,7 @@ def startup():
     local_cur = local.cursor()
     local_cur.execute('select username from userdata');
     users = np.squeeze(local_cur.fetchall())
-    # print(type(users))
-    if (type(users) is str):
+    if (users.shape is ()):
         temp = users
         users = [temp]
     for user in users:
