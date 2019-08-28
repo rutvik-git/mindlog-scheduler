@@ -62,18 +62,18 @@ def msg(user):
     local_cur = local.cursor()
     local_cur.execute('select username from userdata');
     users = np.squeeze(local_cur.fetchall())
-    if (users.shape is ()):
-        temp = users
-        users = [temp]
-    if user in users.any():
-        local_cur.execute("select contact from userdata where username='%s'"%(user))
-        contact = np.squeeze(local_cur.fetchone())
-        local_cur.execute("select carrier from userdata where username='%s'"%(user))
-        carrier = np.squeeze(local_cur.fetchall())
-        # message = 'Please fill your mindlog\n' + 'https://pythonserver-neatlabs.herokuapp.com/mindlog/' + str(user) + ' (notification for timestamp : ' + str(dt.datetime.now()) + ')'
-        # message = 'Please complete your BrainE > Mind Log session. Thank you!'
-        message = 'test message'
-        send_message(user, str(contact), carrier, message)
+    # if (users.shape is ()):
+    #     temp = users
+    #     users = [temp]
+    # if user in users.any():
+    local_cur.execute("select contact from userdata where username='%s'"%(user))
+    contact = np.squeeze(local_cur.fetchone())
+    local_cur.execute("select carrier from userdata where username='%s'"%(user))
+    carrier = np.squeeze(local_cur.fetchall())
+    # message = 'Please fill your mindlog\n' + 'https://pythonserver-neatlabs.herokuapp.com/mindlog/' + str(user) + ' (notification for timestamp : ' + str(dt.datetime.now()) + ')'
+    # message = 'Please complete your BrainE > Mind Log session. Thank you!'
+    message = 'test message'
+    send_message(user, str(contact), carrier, message)
 
 def schedule_user(user):
     LOCAL_DATABASE = "postgres://vlbetxrecjmcay:801d255c4b4ae13e105d06c4220a972254e65d935edbfba6f31493f133b91764@ec2-50-19-114-27.compute-1.amazonaws.com:5432/dfqi93sufn0631"
