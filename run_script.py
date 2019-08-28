@@ -123,9 +123,10 @@ def startup():
     local_cur = local.cursor()
     local_cur.execute('select username from userdata');
     users = np.squeeze(local_cur.fetchall())
-    # if (type(users) is not list):
-    #     temp = users
-    #     users = [temp]
+    # print(type(users))
+    if (type(users) is str):
+        temp = users
+        users = [temp]
     for user in users:
         local_cur.execute("select * from userdata where username='%s'"%(user))
         result = local_cur.fetchone()
