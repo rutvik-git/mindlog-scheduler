@@ -1,7 +1,6 @@
 import os
 import datetime as dt
 import numpy as np
-import psycopg2 as pg
 from apscheduler.schedulers.blocking import BlockingScheduler
 import smtplib, ssl
 import threading

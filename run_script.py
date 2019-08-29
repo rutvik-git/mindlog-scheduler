@@ -44,23 +44,16 @@ def send_message(user, contact, carrier, message):
     password = "TeamBrainE20!("
     smtp_server = "smtp.ucsd.edu"
     sender_email = "neatlabs@ucsd.edu"
-    # try:
-    #     context =  ssl.create_default_context()
-    #     server = smtplib.SMTP_SSL(smtp_server, port)
-    #     server.login(sender_email, password)
-    #     to_number = (str(contact)+'{}').format(carriers[str(carrier)])
-    #     server.sendmail(sender_email, to_number, message)
-    #     server.quit()
-    #     info(user,'user notification',dt.datetime.now())
-    # except:
-    #     info(user,'user notification failed',dt.datetime.now())
-    context =  ssl.create_default_context()
-    server = smtplib.SMTP_SSL(smtp_server, port)
-    server.login(sender_email, password)
-    to_number = (str(contact)+'{}').format(carriers[str(carrier)])
-    server.sendmail(sender_email, to_number, message)
-    server.quit()
-    info(user,'user notification',dt.datetime.now())
+    try:
+        context =  ssl.create_default_context()
+        server = smtplib.SMTP_SSL(smtp_server, port)
+        server.login(sender_email, password)
+        to_number = (str(contact)+'{}').format(carriers[str(carrier)])
+        server.sendmail(sender_email, to_number, message)
+        server.quit()
+        info(user,'user notification',dt.datetime.now())
+    except:
+        info(user,'user notification failed',dt.datetime.now())
 
 
 def msg(user):
