@@ -1,2 +1,0 @@
-from mindllog_functions import *
-all_users_notification_scheduler()

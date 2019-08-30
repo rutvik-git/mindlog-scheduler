@@ -30,7 +30,7 @@ carriers = {
 }
 
 def info(user, type, time):
-    LOCAL_DATABASE = "postgres://vlbetxrecjmcay:801d255c4b4ae13e105d06c4220a972254e65d935edbfba6f31493f133b91764@ec2-50-19-114-27.compute-1.amazonaws.com:5432/dfqi93sufn0631"
+    LOCAL_DATABASE = str(os.environ['DATABASE_URL'])
     local = pg.connect(LOCAL_DATABASE, sslmode='require')
     local_cur = local.cursor()
     local_cur.execute("insert into server_logs values(DEFAULT, '%s', '%s', '%s')" % (user, type, time))
@@ -38,12 +38,9 @@ def info(user, type, time):
 
 def send_message(user, contact, carrier, message):
     port = 465
-    # password = "neatlabs-mindlog"
-    # smtp_server = "smtp.gmail.com"
-    # sender_email = "mindlog.neatlabs@gmail.com"
-    password = "TeamBrainE20!("
-    smtp_server = "smtp.ucsd.edu"
-    sender_email = "neatlabs@ucsd.edu"
+    password = str(os.environ['PSWD'])
+    smtp_server = str(os.environ['SMTP'])
+    sender_email = str(os.environ['EMAIL'])
     try:
         context =  ssl.create_default_context()
         server = smtplib.SMTP_SSL(smtp_server, port)
@@ -57,7 +54,7 @@ def send_message(user, contact, carrier, message):
 
 
 def msg(user):
-    LOCAL_DATABASE = "postgres://vlbetxrecjmcay:801d255c4b4ae13e105d06c4220a972254e65d935edbfba6f31493f133b91764@ec2-50-19-114-27.compute-1.amazonaws.com:5432/dfqi93sufn0631"
+    LOCAL_DATABASE = str(os.environ['DATABASE_URL'])
     local = pg.connect(LOCAL_DATABASE, sslmode='require')
     local_cur = local.cursor()
     local_cur.execute('select username from userdata');
@@ -76,7 +73,7 @@ def msg(user):
     send_message(user, str(contact), carrier, message)
 
 def schedule_user(user):
-    LOCAL_DATABASE = "postgres://vlbetxrecjmcay:801d255c4b4ae13e105d06c4220a972254e65d935edbfba6f31493f133b91764@ec2-50-19-114-27.compute-1.amazonaws.com:5432/dfqi93sufn0631"
+    LOCAL_DATABASE = str(os.environ['DATABASE_URL'])
     local = pg.connect(LOCAL_DATABASE, sslmode='require')
     local_cur = local.cursor()
     local_cur.execute("select scheduled from userdata where username ='%s'"%(user))
@@ -104,7 +101,7 @@ def schedule_user(user):
         scheduler.start()
 
 def schedule_new_users():
-    LOCAL_DATABASE = "postgres://vlbetxrecjmcay:801d255c4b4ae13e105d06c4220a972254e65d935edbfba6f31493f133b91764@ec2-50-19-114-27.compute-1.amazonaws.com:5432/dfqi93sufn0631"
+    LOCAL_DATABASE = str(os.environ['DATABASE_URL'])
     local = pg.connect(LOCAL_DATABASE, sslmode='require')
     local_cur = local.cursor()
     local_cur.execute("select username, scheduled from userdata")
@@ -119,7 +116,7 @@ def schedule_new_users():
 
 def startup():
     print('Startup Start...')
-    LOCAL_DATABASE = "postgres://vlbetxrecjmcay:801d255c4b4ae13e105d06c4220a972254e65d935edbfba6f31493f133b91764@ec2-50-19-114-27.compute-1.amazonaws.com:5432/dfqi93sufn0631"
+    LOCAL_DATABASE = str(os.environ['DATABASE_URL'])
     local = pg.connect(LOCAL_DATABASE, sslmode='require')
     local_cur = local.cursor()
     local_cur.execute('select username from userdata');
